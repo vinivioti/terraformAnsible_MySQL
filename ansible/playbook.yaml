@@ -1,0 +1,41 @@
+---
+- hosts: all
+
+  tasks: 
+  - name: Install apache 
+    apt:
+     name: apache2
+     state: latest
+    become: yes
+
+  - name: Assegurar Apache
+    service:
+     name: apache2
+     state: started
+    become: yes
+
+  - name: "Instalar MySQL"
+    apt:
+     update_cache: yes
+     cache_valid_time: 3600
+     name: ["mysql-server-5.7", "python3-pymysql"]
+     state: latest
+    become: yes
+ 
+  - name: "Alterar a senha do root MySQL"
+    mysql_user:
+     name: root
+     host: "{{ item }}"
+     login_unix_socket: /var/run/mysqld/mysqld.sock
+     password: "teste123456"
+     priv: '*.*:ALL,GRANT'
+     check_implicit_admin: true
+    loop: ["10.0.2.12", "127.0.0.1", "::1", "localhost"]
+    become: yes
+    
+  - name: restart mysql
+    service:
+     name: mysql
+     state: restarted
+    become: yes
+  

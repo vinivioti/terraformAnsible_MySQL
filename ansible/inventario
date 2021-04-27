@@ -1,0 +1,9 @@
+[webserver] 
+
+10.0.2.12
+
+[webserver:vars]
+ansible_user=testadmin
+ansible_ssh_pass=Password1234!
+ansible_python_interpreter=/usr/bin/python3
+ansible_ssh_common_args='-o StrictHostKeyChecking=no'
