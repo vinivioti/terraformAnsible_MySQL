@@ -1,4 +1,4 @@
-# terraformAnsible_MySQL
+# Azure_terraform_Ansible_MySQL
 Terraform para instalação do MySQL via Ansible
 
 Segunda atividade do curso Infrastructure and Cloud Computing 
